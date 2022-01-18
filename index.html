@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+  <head>
+    <script>
+      function consoleText(words, id, colors) {
+  if (colors === undefined) colors = ['#fff'];
+  var visible = true;
+  var con = document.getElementById('console');
+  var letterCount = 1;
+  var x = 1;
+  var waiting = false;
+  var target = document.getElementById(id)
+  target.setAttribute('style', 'color:' + colors[0])
+  window.setInterval(function() {
+
+    if (letterCount === 0 && waiting === false) {
+      waiting = true;
+      target.innerHTML = words[0].substring(0, letterCount)
+      window.setTimeout(function() {
+        var usedColor = colors.shift();
+        colors.push(usedColor);
+        var usedWord = words.shift();
+        words.push(usedWord);
+        x = 1;
+        target.setAttribute('style', 'color:' + colors[0])
+        letterCount += x;
+        waiting = false;
+      }, 1000)
+    } else if (letterCount === words[0].length + 1 && waiting === false) {
+      waiting = true;
+      window.setTimeout(function() {
+        x = -1;
+        letterCount += x;
+        waiting = false;
+      }, 1000)
+    } else if (waiting === false) {
+      target.innerHTML = words[0].substring(0, letterCount)
+      letterCount += x;
+    }
+  }, 40)
+  window.setInterval(function() {
+    if (visible === true) {
+      con.className = 'console-underscore hidden'
+      visible = false;
+
+    } else {
+      con.className = 'console-underscore'
+
+      visible = true;
+    }
+  }, 2000)
+}
+        function json2array(json){
+          var result = [];
+          var keys = Object.keys(json);
+          keys.forEach(function(key){
+            result.push(json[key]);
+          });
+        return result;
+        }
+
+      function randomNum(x){
+         return Math.floor(Math.random() * x);
+       }
+      var stringToHTML = function (str) {
+	      var parser = new DOMParser();
+	      var doc = parser.parseFromString(str, 'text/html');
+	      return doc.body;
+      };
+      function koan(){
+        let a = {
+        "Master Foo and the Ten Thousand Lines":"Master Foo once said to a visiting programmer: “There is more Unix-nature in one line of shell script than there is in ten thousand lines of C.” \\n The programmer, who was very proud of his mastery of C, said: “How can this be? C is the language in which the very kernel of Unix is implemented!” \\n Master Foo replied: “That is so. Nevertheless, there is more Unix-nature in one line of shell script than there is in ten thousand lines of C.” \\n The programmer grew distressed. “But through the C language we experience the enlightenment of the Patriarch Ritchie! We become as one with the operating system and the machine, reaping matchless performance!” \\n Master Foo replied: “All that you say is true. But there is still more Unix-nature in one line of shell script than there is in ten thousand lines of C.” \\n The programmer scoffed at Master Foo and rose to depart. But Master Foo nodded to his student Nubi, who wrote a line of shell script on a nearby whiteboard, and said: “Master programmer, consider this pipeline. Implemented in pure C, would it not span ten thousand lines?” \\n The programmer muttered through his beard, contemplating what Nubi had written. Finally he agreed that it was so. “And how many hours would you require to implement and debug that C program?” asked Nubi. “Many,” admitted the visiting programmer. “But only a fool would spend the time to do that when so many more worthy tasks await him.” \\n “And who better understands the Unix-nature?” Master Foo asked. “Is it he who writes the ten thousand lines, or he who, perceiving the emptiness of the task, gains merit by not coding?” Upon hearing this, the programmer was enlightened.",
+        "Sussman attains enlightenment":"In the days when Sussman was a novice, Minsky once came to him as he sat hacking at the PDP-6. “What are you doing?”, asked Minsky. “I am training a randomly wired neural net to play Tic-Tac-Toe” Sussman replied. \\n “Why is the net wired randomly?”, asked Minsky. “I do not want it to have any preconceptions of how to play”, Sussman said. Minsky then shut his eyes. “Why do you close your eyes?”, Sussman asked his teacher. “So that the room will be empty.” At that moment, Sussman was enlightened.",
+        "Drescher and the toaster":"A disciple of another sect once came to Drescher as he was eating his morning meal. “I would like to give you this personality test”, said the outsider, “because I want you to be happy.” \\n Drescher took the paper that was offered him and put it into the toaster, saying: “I wish the toaster to be happy, too.”",
+        "Moon instructs a student":"One day a student came to Moon and said: “I understand how to make a better garbage collector. We must keep a reference count of the pointers to each cons.” \\n Moon patiently told the student the following story: “One day a student came to Moon and said: ‘I understand how to make a better garbage collector... Ed. note: Pure reference-count garbage collectors have problems with circular structures that point to themselves.]",
+        "Tom Knight and the Lisp Machine":"A novice was trying to fix a broken Lisp machine by turning the power off and on. Knight, seeing what the student was doing, spoke sternly: “You cannot fix a machine by just power-cycling it with no understanding of what is going wrong.” \\n Knight turned the machine off and on. The machine worked."
+       }
+      let b = json2array(a);
+      let c = b[randomNum(b.length)];
+      let d = c.split("\\n");
+      //c = c.replace(/(\\n)+/g, '<p/>');
+      //let d = stringToHTML(c);
+      //return d;
+      return d;
+       }
+      function start(){
+        let zen = koan();
+        let x = document.createElement("div");
+        x.id = "Zen";
+        //let target = document.getElementById("Altar");
+        //document.body.appendChild(zen);
+        consoleText(zen, 'text',['#9999FF','#8888FF','#7777FF','#6666FF','#5555FF']);
+
+      }
+    </script>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Khula:700);
+      @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+      @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+      body {
+        background: linear-gradient(45deg, #57003f 0%,#f57453 100%);
+        font-family: 'Ubuntu';
+      }
+      h1 {
+        text-align:center;
+        margin:auto;
+        font-family: 'Ubuntu';
+        text-shadow: 0px 1px 0px rgba(255,255,255,0.2);
+      }
+      #altar{
+        height:1em;
+        width:5em;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .Terminal {
+        width: 600px;
+        height: 400px;
+        box-shadow: 2px 4px 10px rgba(0,0,0,.5);
+      }
+
+      .Terminal__Toolbar {
+        background: linear-gradient(#504b45 0%,#3c3b37 100%);
+        width: 100%;
+        padding: 0 8px;
+        box-sizing: border-box;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+      }
+
+      .Toolbar__buttons {
+        display: flex;
+        align-items: center;
+      }
+
+      .Toolbar__button {
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        padding: 0;
+        font-size: 7px;
+        background: linear-gradient(#7d7871 0%, #595953 100%);
+        text-shadow: 0px 1px 0px rgba(255,255,255,0.2);
+        box-shadow: 0px 0px 1px 0px #41403A,0px 1px 1px 0px #474642;
+        border: none;
+        margin-right: 4px;
+
+      }
+      .Toolbar__button:hover {
+        cursor: pointer;
+      }
+      .Toolbar__button--exit {
+        background: #f25d2b;
+        background: linear-gradient(#f37458 0%, #de4c12 100%);
+        background-clip: padding-box;
+      }
+      .Toolbar__button:focus {
+        outline: none;
+      }
+
+      .Toolbar__user {
+        color: #d5d0ce;
+        margin-left: 4px;
+        font-size: 12px;
+        line-height: 14px;
+        margin-bottom: 1px;
+      }
+      .Terminal__body {
+        background: rgba(56, 4, 40, .9);
+        height: calc(100% - 25px);
+        margin-top: -1px;
+        padding-top: 2px;
+        font-family: 'Ubuntu mono';
+      }
+      .Terminal__text {
+        color: #ddd;
+      }
+
+      .Terminal__Prompt {
+        margin-top: 10px;
+        display: flex;
+      }
+
+      .Prompt__user {
+        color: #87d441;
+      }
+      .Prompt__location {
+        color: #6d85a9;
+      }
+      .Prompt__dollar {
+        color: #ddd;
+      }
+      .console-underscore {
+        height: 17px;
+        width: 8px;
+        background: white;
+        display: block;
+        margin-left: 8px;
+        animation: 2000ms ease infinite alternate blink;
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .Terminal {
+          max-height: 90%;
+          width: 95%;
+        }
+      }
+.hidden {
+  opacity:0;
+}
+
+    </style>
+  </head>
+  <body onload="start()">
+  <h1>KOAN</h1>
+  <div class="container">
+  <div class="Terminal">
+    <div class="Terminal__Toolbar">
+      <div class="Toolbar__buttons">
+        <button class="Toolbar__button Toolbar__button--exit">&#10005;</button>
+        <button class="Toolbar__button">&#9472;</button>
+        <button class="Toolbar__button">&#9723;</button>
+      </div>
+      <p class="Toolbar__user">hiturunk@ubuntu:~</p>
+    </div>
+    <div class="Terminal__body">
+      <div class="Terminal__Prompt">
+        <span class="Prompt__user">hiturunk@ubuntu:</span><span class="Prompt__location">~</span><span class="Prompt__dollar">$</span>
+        <div class='Terminal__text'><span id='text'></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="Altar">
+  My Creations:
+  <table>
+  <tr>
+  <td><a href="https://penguinswap.eth.limo">
+   PenguinSwap
+  </a>
+  </td>
+  <td>
+    <a href="https://penguinalytics.eth.limo">
+  PenguinAlytics
+  </a>
+  </td>
+  <td>
+    <a href="https://penguinparty.eth.limo">
+  Penguin Party
+  </a>
+  </td>
+  <td>
+    <a href="https://eth.limo">
+    Eth.Limo
+    </a>
+  </td>
+  </tr>
+  </table>
+</div>
+  </body>
+</html>
